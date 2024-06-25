@@ -1,0 +1,104 @@
+/* #region | Root, general styling */
+:root {
+	--spacing_s: 6px;
+	--spacing_m: 10px;
+	--spacing_l: 16px;
+
+	--elev_0: hsl(230, 15%, 15%);
+	--elev_1: hsl(230, 15%, 25%);
+	--color_primary: hsl(0, 0%, 70%);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	color: var(--color_primary);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background-color: var(--elev_0);
+}
+/* #endregion */
+
+
+/* #region | Shared classes */
+.hidden_if_landscape { display: none; }
+/* #endregion */
+
+
+/* #region | Container elements */
+/* Contains all */
+body > div {
+	display: flex;
+	flex-direction: column;
+	width: 75%;
+	max-width: 1400px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+/* Header shown in portrait only mode */
+#portrait_header_container {
+	margin: 0;
+	box-shadow: 0 0 var(--spacing_l) black;
+	background-color: var(--elev_1);
+	z-index: 100;
+}
+
+/* Sidebar and content */
+#main_container {
+	flex-grow: 1;
+	display: flex;
+}
+
+/* Left sidebar */
+#sidebar_container {
+	width: 350px;
+	margin: var(--spacing_l) var(--spacing_l) var(--spacing_l) 0;
+	z-index: 50;
+	background-color: var(--elev_1);
+}
+
+/* Individual pages container */
+#pages_container {
+	flex-grow: 1;
+	margin: var(--spacing_l) 0;
+	background-color: var(--elev_1);
+}
+/* #endregion */
+
+
+/* #region | Media queries */
+/* Switching to fullscreen-ish */
+@media screen and (max-width: 1200px) {
+	body > div { width: 100%; }
+	#main_container { margin: 0 var(--spacing_l); }
+}
+
+/* Switch to portrait */
+@media screen and (max-width: 800px) {
+
+	/* Show all normally hidden elements */
+	.hidden_if_landscape { display: initial; }
+
+	/* Hide elements */
+	.hidden_if_portrait { display: none; }
+
+	/* Remove margins */
+	#main_container, #sidebar_container, #pages_container { margin: 0; }
+
+	/* Hide sidebar, make full width */
+	#sidebar_container {
+		width: 100%;
+		display: none;
+	}
+
+	/* Show sidebar if required */
+	#sidebar_container.show { display: initial; }
+}
+/* #endregion */
