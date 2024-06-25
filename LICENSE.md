@@ -1,0 +1,1 @@
+[Graphics Settings Comparer](https://github.com/TimKoenig96/graphics_settings_comparer/) © 2024 by [Tim König](https://github.com/TimKoenig96/) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
