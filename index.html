@@ -4,6 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Graphics Settings Comparer</title>
+		<meta name="color-scheme" content="dark" />
 		<link rel="stylesheet" href="./style.css" />
 		<script src="./script.js" defer></script>
 	</head>
@@ -16,6 +17,8 @@
 			<div id="portrait_header_container" class="hidden_if_landscape">
 				<div id="portrait_header">
 					<div id="sidebar_toggle"><div></div><div></div><div></div></div>
+
+					<h2>Graphics Settings Comparer</h2>
 				</div>
 			</div>
 
@@ -38,7 +41,22 @@
 				</div>
 
 				<!-- Pages container -->
-				<div id="pages_container">pages container</div>
+				<div id="pages_container">
+
+					<!-- General page -->
+					<div id="general_page" class="content_page">
+						<h1>Welcome!</h1>
+						<hr />
+
+						<p>
+							To see comparisons for a specific setting, click on a game and then choose a setting.
+							<br /><br />
+
+							The benchmarks are to be taken with a grain of salt, as they may be inaccurate
+							due to drivers, patches, different component architecture and lots of other factors.
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>

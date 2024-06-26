@@ -1,9 +1,9 @@
 /* #region | Root, general styling */
 :root {
-	--font_size_s: 12px;
-	--font_size_m: 17px;
-	--font_size_l: 20px;
-	--font_size_xl: 24px;
+	--font_size_s: 14px;
+	--font_size_m: 18px;
+	--font_size_l: 24px;
+	--font_size_xl: 28px;
 	--spacing_s: 6px;
 	--spacing_m: 10px;
 	--spacing_l: 16px;
@@ -12,7 +12,7 @@
 
 	--elev_0: hsl(230, 11%, 14%);
 	--elev_1: hsl(230, 13%, 23%);
-	--elev_2: hsl(230, 10%, 39%);
+	--elev_2: hsl(230, 10%, 37%);
 	--accent: hsl(215, 50%, 43%);
 	--color_primary: hsl(0, 0%, 75%);
 	--color_secondary: hsl(0, 0%, 45%);
@@ -36,6 +36,7 @@ body {
 
 h1 { font-size: var(--font_size_xl); }
 h2 { font-size: var(--font_size_l); }
+h1, h2 { text-align: center; }
 
 hr {
 	border: none;
@@ -53,9 +54,12 @@ input[type="text"] {
 	background-color: var(--elev_0);
 }
 
-input[type="text"]:focus {
-	border: var(--border_width) solid var(--accent);
-}
+input[type="text"]:focus { border: var(--border_width) solid var(--accent); }
+
+table { border-collapse: collapse; }
+table tr:not(:last-child) { border-bottom: var(--border_width) solid var(--elev_2); }
+table td:first-child { border-right: var(--border_width) solid var(--elev_2); }
+table td { padding: var(--spacing_s); }
 /* #endregion */
 
 
@@ -66,6 +70,31 @@ input[type="text"]:focus {
 	color: var(--color_secondary);
 	font-size: var(--font_size_s);
 }
+
+.content_page {
+	height: 100%;
+	padding: var(--spacing_l);
+	overflow: hidden auto;
+}
+
+.content_page > *:not(:last-child) { margin-bottom: var(--spacing_l); }
+
+.hidden { display: none !important; }
+
+.button {
+	background-color: var(--elev_1);
+	padding: var(--spacing_s);
+	border-radius: var(--border_radius);
+	word-break: break-word;
+	cursor: pointer;
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-touch-select: none;
+}
+
+.button:hover { background-color: var(--elev_2); }
 /* #endregion */
 
 
@@ -94,10 +123,12 @@ body > div {
 #main_container {
 	flex-grow: 1;
 	display: flex;
+	height: 100%;
 }
 
 /* Left sidebar */
 #sidebar_container {
+	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
 	width: 350px;
@@ -113,8 +144,6 @@ body > div {
 #pages_container {
 	flex-grow: 1;
 	margin: var(--spacing_l) 0;
-	padding: var(--spacing_l);
-	overflow: hidden auto;
 	border-radius: var(--border_radius);
 	background-color: var(--elev_1);
 }
@@ -146,13 +175,17 @@ body > div {
 
 
 /* #region | Sidebar */
-#sidebar_container > *:not(:last-child) {
-	margin-bottom: var(--spacing_m);
-}
+#sidebar_container > * { width: 100%; }
+#sidebar_container > *:not(:last-child) { margin-bottom: var(--spacing_m); }
 
 #games_list {
-	padding: var(--spacing_s);
+	display: flex;
+	flex-wrap: wrap;
+	max-height: 180px;
+	gap: var(--spacing_s);
+	overflow: hidden auto;
 	border-radius: var(--border_radius);
+	border: var(--spacing_s) solid var(--elev_0);
 	background-color: var(--elev_0);
 }
 /* #endregion */
