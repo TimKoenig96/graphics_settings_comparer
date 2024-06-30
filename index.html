@@ -30,12 +30,12 @@
 					<h1>Games</h1>
 					<input type="text" placeholder="Search..." autocomplete="off" />
 
-					<div id="games_list">
+					<div id="games_list" class="button_container">
 						<i class="subtext">Loading...</i>
 					</div><hr />
 
 					<h1>Settings</h1>
-					<div id="settings_list">
+					<div id="settings_list" class="button_container">
 						<i class="subtext">Select a game to show the list of settings...</i>
 					</div>
 				</div>
@@ -55,6 +55,25 @@
 							The benchmarks are to be taken with a grain of salt, as they may be inaccurate
 							due to drivers, patches, different component architecture and lots of other factors.
 						</p>
+					</div>
+
+					<!-- Game page -->
+					<div id="game_page" class="content_page hidden"></div>
+
+					<!-- Setting page -->
+					<div id="setting_page" class="content_page hidden">
+						<div class="comparison_container">
+							<div class="images_container">
+								<img id="control_image" width="1920" height="1080" />
+							</div>
+						</div>
+					</div>
+
+					<!-- Permanently invisible to keep track of optimal image width -->
+					<div id="control_container" class="content_page">
+						<div class="comparison_container">
+							<div class="images_container" id="control_element"></div>
+						</div>
 					</div>
 				</div>
 			</div>
