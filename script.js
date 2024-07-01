@@ -7,36 +7,62 @@ const games = new Map([
 			setup: 0
 		},
 		settings: {
-			fxaa: {
-				label: "FXAA",
-				default_option: "on",
+			fxaa_msaa_txaa: {
+				label: "FXAA, MSAA, TXAA",
+				default_option: "fxaa_on_msaa_x4_txaa_on",
 				options: {
-					"off": "Off",
-					"on": "On"
+					"fxaa_off_msaa_off_txaa_off": "Off, Off, Off",
+					"fxaa_off_msaa_x2_txaa_off": "Off, X2, Off",
+					"fxaa_off_msaa_x4_txaa_off": "Off, X4, Off",
+					"fxaa_off_msaa_x8_txaa_off": "Off, X8, Off",
+					"fxaa_off_msaa_x2_txaa_on": "Off, X2, On",
+					"fxaa_off_msaa_x4_txaa_on": "Off, X4, On",
+
+					"fxaa_on_msaa_off_txaa_off": "On, Off, Off",
+					"fxaa_on_msaa_x2_txaa_off": "On, X2, Off",
+					"fxaa_on_msaa_x4_txaa_off": "On, X4, Off",
+					"fxaa_on_msaa_x8_txaa_off": "On, X8, Off",
+					"fxaa_on_msaa_x2_txaa_on": "On, X2, On",
+					"fxaa_on_msaa_x4_txaa_on": "On, X4, On"
 				},
-				comparisons: []
+				comparisons: [
+					{
+						note: "The 'aa' stands for 'Anti Aliasing' and it smoothes the edges of the images that are already on the screen.",
+						fps: [
+							99,
+							86,
+							79,
+							65,
+							83,
+							77,
+							97,
+							84,
+							78,
+							65,
+							84,
+							77
+						]
+					},
+					{
+						note: "The same images, but it's zoomed in so you can see better.",
+						fps: [
+							99,
+							86,
+							79,
+							65,
+							83,
+							77,
+							97,
+							84,
+							78,
+							65,
+							84,
+							77
+						]
+					}
+				]
 			},
-			msaa: {
-				label: "MSAA",
-				default_option: "x4",
-				options: {
-					"off": "Off",
-					"x2": "X2",
-					"x4": "X4",
-					"x8": "X8"
-				},
-				comparisons: []
-			},
-			txaa: {
-				label: "TXAA",
-				default_option: "on",
-				options: {
-					"off": "Off",
-					"on": "On"
-				},
-				comparisons: []
-			},
-			population_density: {
+			/*population_density: {
 				label: "Population Density",
 				default_option: "100",
 				options: {
@@ -53,8 +79,8 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			},
-			population_variety: {
+			},*/
+			/*population_variety: {
 				label: "Population Variety",
 				default_option: "100",
 				options: {
@@ -71,8 +97,8 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			},
-			distance_scaling: {
+			},*/
+			/*distance_scaling: {
 				label: "Distance Scaling",
 				default_option: "100",
 				options: {
@@ -89,8 +115,8 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			},
-			texture_quality: {
+			},*/
+			/*texture_quality: {
 				label: "Texture Quality",
 				default_option: "very_high",
 				options: {
@@ -99,8 +125,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			shader_quality: {
+			},*/
+			/*shader_quality: {
 				label: "Shader Quality",
 				default_option: "very_high",
 				options: {
@@ -109,8 +135,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			shadow_quality: {
+			},*/
+			/*shadow_quality: {
 				label: "Shadow Quality",
 				default_option: "very_high",
 				options: {
@@ -119,8 +145,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			reflection_quality: {
+			},*/
+			/*reflection_quality: {
 				label: "Reflection Quality",
 				default_option: "ultra",
 				options: {
@@ -130,8 +156,8 @@ const games = new Map([
 					"ultra": "Ultra"
 				},
 				comparisons: []
-			},
-			reflection_msaa: {
+			},*/
+			/*reflection_msaa: {
 				label: "Reflection MSAA",
 				default_option: "x8",
 				options: {
@@ -141,8 +167,8 @@ const games = new Map([
 					"x8": "X8"
 				},
 				comparisons: []
-			},
-			water_quality: {
+			},*/
+			/*water_quality: {
 				label: "Water Quality",
 				default_option: "very_high",
 				options: {
@@ -151,8 +177,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			particles_quality: {
+			},*/
+			/*particles_quality: {
 				label: "Particles Quality",
 				default_option: "very_high",
 				options: {
@@ -161,8 +187,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			grass_quality: {
+			},*/
+			/*grass_quality: {
 				label: "Grass Quality",
 				default_option: "ultra",
 				options: {
@@ -172,8 +198,8 @@ const games = new Map([
 					"ultra": "Ultra"
 				},
 				comparisons: []
-			},
-			soft_shadows: {
+			},*/
+			/*soft_shadows: {
 				label: "Soft Shadows",
 				default_option: "nvidia_pcss",
 				options: {
@@ -185,8 +211,8 @@ const games = new Map([
 					"nvidia_pcss": "NVIDIA PCSS"
 				},
 				comparisons: []
-			},
-			post_fx: {
+			},*/
+			/*post_fx: {
 				label: "Post FX",
 				default_option: "ultra",
 				options: {
@@ -196,8 +222,8 @@ const games = new Map([
 					"ultra": "Ultra"
 				},
 				comparisons: []
-			},
-			motion_blur_strength: {
+			},*/
+			/*motion_blur_strength: {
 				label: "Motion Blur Strength",
 				default_option: "100",
 				options: {
@@ -205,8 +231,8 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			},
-			in_game_depth_of_field_effects: {
+			},*/
+			/*in_game_depth_of_field_effects: {
 				label: "In-Game Depth Of Field Effects",
 				default_option: "on",
 				options: {
@@ -214,7 +240,7 @@ const games = new Map([
 					"on": "On"
 				},
 				comparisons: []
-			},
+			},*/
 			anisotropic_filtering: {
 				label: "Anisotropic Filtering",
 				default_option: "x16",
@@ -227,6 +253,7 @@ const games = new Map([
 				},
 				comparisons: [
 					{
+						note: "Look at the road markings in the distance. The performance decrease is likely just margin of error, so overall I'd recommend leaving this setting at X16.",
 						fps: [
 							91,
 							91,
@@ -237,7 +264,7 @@ const games = new Map([
 					}
 				]
 			},
-			ambient_occlusion: {
+			/*ambient_occlusion: {
 				label: "Ambient Occlusion",
 				default_option: "high",
 				options: {
@@ -246,8 +273,8 @@ const games = new Map([
 					"high": "High"
 				},
 				comparisons: []
-			},
-			tessellation: {
+			},*/
+			/*tessellation: {
 				label: "Tessellation",
 				default_option: "very_high",
 				options: {
@@ -257,8 +284,8 @@ const games = new Map([
 					"very_high": "Very High"
 				},
 				comparisons: []
-			},
-			long_shadows: {
+			},*/
+			/*long_shadows: {
 				label: "Long Shadows",
 				default_option: "on",
 				options: {
@@ -266,8 +293,8 @@ const games = new Map([
 					"on": "On"
 				},
 				comparisons: []
-			},
-			high_resolution_shadows: {
+			},*/
+			/*high_resolution_shadows: {
 				label: "High Resolution Shadows",
 				default_option: "on",
 				options: {
@@ -275,8 +302,8 @@ const games = new Map([
 					"on": "On"
 				},
 				comparisons: []
-			},
-			extended_distance_scaling: {
+			},*/
+			/*extended_distance_scaling: {
 				label: "Extended Distance Scaling",
 				default_option: "100",
 				options: {
@@ -293,8 +320,8 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			},
-			extended_shadows_distance: {
+			},*/
+			/*extended_shadows_distance: {
 				label: "Extended Shadows Distance",
 				default_option: "100",
 				options: {
@@ -311,7 +338,7 @@ const games = new Map([
 					"100": "100%"
 				},
 				comparisons: []
-			}
+			}*/
 		}
 	}]
 ]);
@@ -499,38 +526,39 @@ function setSettingActive(target_setting) {
 	comparisons.forEach((comparison, comp_num) => {
 
 		// Current comparison highest and lowest fps
-		const max_fps = Math.max(...comparison.fps);
-		const min_fps = Math.min(...comparison.fps);
+		const max_fps = Math.max(...comparison.fps || [0]);
+		// const min_fps = Math.min(...comparison.fps || [0]);
 
 		// Generate radio inputs and FPS bars code
 		let left_inputs_code = "";
 		let right_inputs_code = "";
 		let fps_bars_code = "";
-		comparison.fps.forEach((fps, fps_num) => {
-			const option_label = options[option_keys[fps_num]];
-
+		for (const [option_id, option_label] of Object.entries(options)) {
 			left_inputs_code += `
-				<input type="radio" name="c${comp_num}_l" id="c${comp_num}_l_${option_keys[fps_num]}" data-option="${option_keys[fps_num]}" ${option_keys[fps_num] === highest_option ? "checked" : ""} />
-				<label for="c${comp_num}_l_${option_keys[fps_num]}">${option_label}</label><br />
+				<input type="radio" name="c${comp_num}_l" id="c${comp_num}_l_${option_id}" data-option="${option_id}" ${option_id === highest_option ? "checked" : ""} />
+				<label for="c${comp_num}_l_${option_id}">${option_label}</label><br />
 			`;
 			right_inputs_code += `
-				<input type="radio" name="c${comp_num}_r" id="c${comp_num}_r_${option_keys[fps_num]}" data-option="${option_keys[fps_num]}" ${option_keys[fps_num] === lowest_option ? "checked" : ""} />
-				<label for="c${comp_num}_r_${option_keys[fps_num]}">${option_label}</label><br />
+				<input type="radio" name="c${comp_num}_r" id="c${comp_num}_r_${option_id}" data-option="${option_id}" ${option_id === lowest_option ? "checked" : ""} />
+				<label for="c${comp_num}_r_${option_id}">${option_label}</label><br />
 			`;
 
-			fps_bars_code += `
-				<tr>
-					<td>${option_label}: ${fps}fps</td>
-					<td><div class="fps_bar" style="width: ${fps / max_fps * 100}%;"></div></td>
-				</tr>
-			`;
-		});
+			if (comparison.fps) {
+				const fps = comparison.fps[option_keys.indexOf(option_id)];
+				fps_bars_code += `
+					<tr>
+						<td>${option_label}: ${fps}fps</td>
+						<td><div class="fps_bar" style="width: ${fps / max_fps * 100}%;"></div></td>
+					</tr>
+				`;
+			}
+		}
 
 		// Merge into comparisons code
 		comparisons_code += `
 			<div class="comparison_container" style="--cut: 50%;">
 				<h2>Comparison ${comp_num + 1}</h2>
-				${comparison.note ?? ""}
+				${comparison.note ? `<div class="comparison_note">${comparison.note}</div>` : ""}
 
 				<div class="images_container">
 					<img id="c${comp_num}_l" class="img_left" src="./media/${current_game}/${target_setting}/${comp_num}/${highest_option}.jpg" width="1920" height="1080" />
@@ -548,9 +576,7 @@ function setSettingActive(target_setting) {
 					</div>
 				</div>
 
-				<table class="fps_container">
-					${fps_bars_code}
-				</table>
+				${fps_bars_code ? `<table class="fps_container">${fps_bars_code}</table>` : ""}
 			</div>
 		`;
 	});

@@ -2,8 +2,8 @@
 :root {
 	--font_size_s: 14px;
 	--font_size_m: 18px;
-	--font_size_l: 20px;
-	--font_size_xl: 28px;
+	--font_size_l: 23px;
+	--font_size_xl: 30px;
 
 	--spacing_s: 6px;
 	--spacing_m: 10px;
@@ -239,6 +239,8 @@ body > div {
 
 /* #region | Pages */
 #game_page table { width: 100%; }
+
+.comparison_note { text-align: center; }
 
 .comparison_container > * { margin-bottom: var(--spacing_l); }
 .comparison_container .slider {
