@@ -14,21 +14,7 @@ const games = new Map([
 					"off": "Off",
 					"on": "On"
 				},
-				comparisons: [
-					// { // First comparison
-					// 	note: "Some kind of note here.",
-					// 	fps: [
-					// 		99,
-					// 		91
-					// 	]
-					// },
-					// { // Second comparison
-					// 	fps: [
-					// 		9,
-					// 		2
-					// 	]
-					// }
-				]
+				comparisons: []
 			},
 			msaa: {
 				label: "MSAA",
@@ -356,8 +342,6 @@ const pages_container = document.getElementById("pages_container");
 const general_page = document.getElementById("general_page");
 const game_page = document.getElementById("game_page");
 const setting_page = document.getElementById("setting_page");
-
-const control_element = document.getElementById("control_element");
 // #endregion
 
 
@@ -549,8 +533,8 @@ function setSettingActive(target_setting) {
 				${comparison.note ?? ""}
 
 				<div class="images_container">
-					<img id="c${comp_num}_l" class="img_left" src="./media/${current_game}/${target_setting}/${comp_num}/${highest_option}/original.png" width="1920" height="1080" />
-					<img id="c${comp_num}_r" class="img_right" src="./media/${current_game}/${target_setting}/${comp_num}/${lowest_option}/original.png" width="1920" height="1080" />
+					<img id="c${comp_num}_l" class="img_left" src="./media/${current_game}/${target_setting}/${comp_num}/${highest_option}.jpg" width="1920" height="1080" />
+					<img id="c${comp_num}_r" class="img_right" src="./media/${current_game}/${target_setting}/${comp_num}/${lowest_option}.jpg" width="1920" height="1080" />
 				</div>
 
 				<input data-target="c${comp_num}_l" class="slider" type="range" min="0" max="10000" value="5000" />
@@ -594,7 +578,8 @@ function settingInputHandler(event) {
 	if (event.target.name) {
 		const target_image = document.getElementById(event.target.name);
 		const current_src = target_image.getAttribute("src");
-		target_image.setAttribute("src", current_src.replace(/\/([^\/]+)\/([^\/]+)$/, `/${event.target.dataset.option}/$2`));
+		console.log(current_src)
+		target_image.setAttribute("src", current_src.replace(/([^\/]+)$/, `${event.target.dataset.option}.jpg`));
 	}
 
 	// No name, meaning it's a range
@@ -627,7 +612,6 @@ games_list_container.addEventListener("click", handleGameButtonClick);
 settings_list_container.addEventListener("click", handleSettingButtonClick);
 setting_page.addEventListener("input", settingInputHandler);
 search_input.addEventListener("input", searchGame);
-// TODO: Resize & load listeners, get control element width, either update all images or just set variables
 // #endregion
 
 init();
