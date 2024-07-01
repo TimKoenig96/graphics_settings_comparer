@@ -339,6 +339,8 @@ const setups = [
 	}
 ];
 
+const game_buttons = new Map();
+
 let current_game, current_setting; // Will be set after content generated
 // #endregion
 
@@ -346,6 +348,7 @@ let current_game, current_setting; // Will be set after content generated
 // #region | Elements
 const sidebar_toggle = document.getElementById("sidebar_toggle");
 const sidebar_container = document.getElementById("sidebar_container");
+const search_input = document.getElementById("search_input");
 const games_list_container = document.getElementById("games_list");
 const settings_list_container = document.getElementById("settings_list");
 
@@ -390,6 +393,9 @@ function generateGamesList() {
 		code = `${code}<div data-game="${id}" class="button">${label}</div>`;
 	});
 	games_list_container.innerHTML = code;
+
+	// Update game buttons list
+	document.querySelectorAll("[data-game]").forEach(e => game_buttons.set(e.textContent, e));
 }
 
 // Toggle the sidebar when in portrait mode
@@ -597,6 +603,21 @@ function settingInputHandler(event) {
 		target_image.style.setProperty("--cut", `${Number(event.target.value) / 100}%`);
 	}
 }
+
+// Search and filter the list of games
+function searchGame() {
+	const search_string = search_input.value.replaceAll(/[^A-Za-z0-9-_:]/g, "");
+
+	if (!search_string) {
+		game_buttons.forEach(e => e.classList.remove("hidden"));
+	} else {
+		const regex = new RegExp(search_string.split("").join(".*"), "i");
+		game_buttons.forEach((e, label) => {
+			if (regex.test(label)) e.classList.remove("hidden");
+			else e.classList.add("hidden");
+		});
+	}
+}
 // #endregion
 
 
@@ -605,6 +626,7 @@ sidebar_toggle.addEventListener("click", toggleSidebar);
 games_list_container.addEventListener("click", handleGameButtonClick);
 settings_list_container.addEventListener("click", handleSettingButtonClick);
 setting_page.addEventListener("input", settingInputHandler);
+search_input.addEventListener("input", searchGame);
 // TODO: Resize & load listeners, get control element width, either update all images or just set variables
 // #endregion
 
