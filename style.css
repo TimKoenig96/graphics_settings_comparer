@@ -257,6 +257,7 @@ body > div {
 	grid-area: img_left;
 	width: 100%;
 	height: auto;
+	border-radius: var(--border_radius);
 }
 
 .img_left {
@@ -266,36 +267,46 @@ body > div {
 
 .img_right { z-index: 100; }
 
-.options_container {
-	display: flex;
-	justify-content: space-around;
+/* Comparison data container */
+.comparison_data {
 	padding: var(--spacing_s);
 	border-radius: var(--border_radius);
 	background-color: var(--elev_0);
 }
 
-.fps_container {
-	padding: var(--spacing_s);
-	width: 100%;
-	border-radius: var(--border_radius);
-	background-color: var(--elev_0);
-}
-
-.fps_container td:first-child {
-	width: 1% !important;
+/* Comparison data table */
+.comparison_data table {
+	border-collapse: collapse;
 	white-space: nowrap;
-	padding-right: var(--spacing_s);
 }
 
-.fps_bar {
+/* Comparison data inputs */
+.comparison_data input {
+	appearance: none;
+	width: 1em;
+	height: 1em;
+	border-radius: var(--border_radius);
+	border: 0.2em solid var(--elev_1);
+	margin-right: var(--spacing_s);
+	transform: translateY(2px);
+	cursor: pointer;
+	background-color: var(--elev_0);
+}
+.comparison_data input:hover { background-color: var(--elev_1); }
+.comparison_data input:checked { background-color: var(--accent); }
+
+.comparison_data td:nth-child(3) { padding-right: var(--spacing_s); }
+.comparison_data td:nth-child(4) { width: 100%; }
+
+.comparison_data .fps_bar {
+	padding: 0 var(--spacing_s);
+	text-align: right;
+	margin: 1px 0;
+	border-radius: var(--border_radius);
 	background-color: var(--accent);
-	height: 5px;
-	width: 100%;
 }
 
-#control_container {
-	opacity: 0%;
-}
+.comparison_data .fps_bar p { transform: translateY(-1px); }
 /* #endregion */
 
 

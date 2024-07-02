@@ -10,6 +10,7 @@ const games = new Map([
 			fxaa_msaa_txaa: {
 				label: "FXAA, MSAA, TXAA",
 				default_option: "fxaa_on_msaa_x4_txaa_on",
+				note: "The 'aa' stands for Anti Aliasing, and it smoothes the image a bit. I'd recommend at least using FXAA. If you can, use FXAA in combination with MSAA X2, but any more than that just uses too many resources to make sense.",
 				options: {
 					"fxaa_off_msaa_off_txaa_off": "Off, Off, Off",
 					"fxaa_off_msaa_x2_txaa_off": "Off, X2, Off",
@@ -27,7 +28,6 @@ const games = new Map([
 				},
 				comparisons: [
 					{
-						note: "The 'aa' stands for 'Anti Aliasing' and it smoothes the edges of the images that are already on the screen.",
 						fps: [
 							99,
 							86,
@@ -527,38 +527,35 @@ function setSettingActive(target_setting) {
 
 		// Current comparison highest and lowest fps
 		const max_fps = Math.max(...comparison.fps || [0]);
-		// const min_fps = Math.min(...comparison.fps || [0]);
+		const min_fps = Math.min(...comparison.fps || [0]);
+		const range = max_fps - min_fps;
+		const buffer_proportion = 0.3;
+		const buffer = range * buffer_proportion;
 
 		// Generate radio inputs and FPS bars code
-		let left_inputs_code = "";
-		let right_inputs_code = "";
-		let fps_bars_code = "";
+		let comparison_data_code = "";
 		for (const [option_id, option_label] of Object.entries(options)) {
-			left_inputs_code += `
-				<input type="radio" name="c${comp_num}_l" id="c${comp_num}_l_${option_id}" data-option="${option_id}" ${option_id === highest_option ? "checked" : ""} />
-				<label for="c${comp_num}_l_${option_id}">${option_label}</label><br />
+			const fps = comparison.fps?.[option_keys.indexOf(option_id)];
+			comparison_data_code += `
+				<tr>
+					<td>
+						<input type="radio" name="c${comp_num}_l" data-option="${option_id}" ${option_id == highest_option ? "checked" : ""} />
+					</td>
+					<td>
+						<input type="radio" name="c${comp_num}_r" data-option="${option_id}" ${option_id == lowest_option ? "checked" : ""} />
+					</td>
+					<td>${option_label}</td>
+					<td>${fps ? `<div class="fps_bar" style="width: ${(fps - min_fps + buffer) / (range + buffer) * 100}%;"><p>${fps} fps</p></div>` : ""}</td>
+				</tr>
 			`;
-			right_inputs_code += `
-				<input type="radio" name="c${comp_num}_r" id="c${comp_num}_r_${option_id}" data-option="${option_id}" ${option_id === lowest_option ? "checked" : ""} />
-				<label for="c${comp_num}_r_${option_id}">${option_label}</label><br />
-			`;
-
-			if (comparison.fps) {
-				const fps = comparison.fps[option_keys.indexOf(option_id)];
-				fps_bars_code += `
-					<tr>
-						<td>${option_label}: ${fps}fps</td>
-						<td><div class="fps_bar" style="width: ${fps / max_fps * 100}%;"></div></td>
-					</tr>
-				`;
-			}
 		}
 
 		// Merge into comparisons code
 		comparisons_code += `
 			<div class="comparison_container" style="--cut: 50%;">
 				<h2>Comparison ${comp_num + 1}</h2>
-				${comparison.note ? `<div class="comparison_note">${comparison.note}</div>` : ""}
+
+				${comparison.note ? `<p class="comparison_note">${comparison.note}</p>` : ""}
 
 				<div class="images_container">
 					<img id="c${comp_num}_l" class="img_left" src="./media/${current_game}/${target_setting}/${comp_num}/${highest_option}.jpg" width="1920" height="1080" />
@@ -567,16 +564,11 @@ function setSettingActive(target_setting) {
 
 				<input data-target="c${comp_num}_l" class="slider" type="range" min="0" max="10000" value="5000" />
 
-				<div class="options_container">
-					<div>
-						${left_inputs_code}
-					</div>
-					<div>
-						${right_inputs_code}
-					</div>
+				<div class="comparison_data">
+					<table>
+						${comparison_data_code}
+					</table>
 				</div>
-
-				${fps_bars_code ? `<table class="fps_container">${fps_bars_code}</table>` : ""}
 			</div>
 		`;
 	});
@@ -585,6 +577,7 @@ function setSettingActive(target_setting) {
 	setting_page.innerHTML = `
 		<h1>${game.label}</h1>
 		<h2>${setting.label}</h2><hr />
+		${setting.note ? `<p class="comparison_note">${setting.note}</p>` : ""}
 
 		${comparisons_code}
 	`;
@@ -604,7 +597,6 @@ function settingInputHandler(event) {
 	if (event.target.name) {
 		const target_image = document.getElementById(event.target.name);
 		const current_src = target_image.getAttribute("src");
-		console.log(current_src)
 		target_image.setAttribute("src", current_src.replace(/([^\/]+)$/, `${event.target.dataset.option}.jpg`));
 	}
 
