@@ -136,16 +136,33 @@ const games = new Map([
 				},
 				comparisons: []
 			},*/
-			/*shadow_quality: {
+			shadow_quality: {
 				label: "Shadow Quality",
 				default_option: "very_high",
+				note: "Extended shadow distance gets set to 0% if the shadow quality is not set to very high, so I left it at 0% for all tests.",
 				options: {
 					"normal": "Normal",
 					"high": "High",
 					"very_high": "Very High"
 				},
-				comparisons: []
-			},*/
+				comparisons: [
+					{
+						fps: [
+							127,
+							120,
+							115
+						]
+					},
+					{
+						note: "For this test, it's the same location, but with soft shadows set to sharp and high resolution shadows turned off.",
+						fps: [
+							142,
+							140,
+							137
+						]
+					}
+				]
+			},
 			/*reflection_quality: {
 				label: "Reflection Quality",
 				default_option: "ultra",
